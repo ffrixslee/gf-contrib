@@ -1,9 +1,9 @@
 -- (c) 2009 Aarne Ranta under LGPL
 
-incomplete concrete FoodsI of Foods = 
+incomplete concrete FoodsI of Foods =
     open Syntax, LexFoods in {
   lincat
-    Comment = Utt ; 
+    Comment = Utt ;
     Item = NP ;
     Kind = CN ;
     Quality = AP ;
