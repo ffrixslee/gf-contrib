@@ -8,6 +8,7 @@ abstract Food = {
   fun
     {-where you place your rules (?)
      Rules for forming plural items:-}
+    
     -- These, Those : Kind -> Item
     --Regular Rules
     Is : Item -> Quality -> Phrase ;

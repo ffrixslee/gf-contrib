@@ -6,11 +6,8 @@ incomplete concrete mp3I of mp3 =
         Command = Utt ;
         Object = CN ;
         Verb = V2 ;
-        ITEM = NP ; 
+        Item = NP ; 
     lin
-
-        -- command = mkUtt (mkCl (mkVP (mkCN object))) ;
-        verb object = mkCl (mkVP (mkCN object)) ;
         
         verb_action v2 np = mkUtt (mkImp (mkVP v2 np)) ;
         The object = mkNP the_Det object ;
@@ -20,10 +17,10 @@ incomplete concrete mp3I of mp3 =
         Artist = mkCN artist_N ;
         Album = mkCN album_N ; 
 
-        Play = mkV2 play_V ;
-        Remove = mkV2 remove_V ;
-        Stop = mkV2 stop_V ;
-        Pause = mkV2 pause_V ;
+        Play = play_V2 ;
+        Remove = remove_V2 ;
+        Stop = stop_V2 ;
+        Pause = pause_V2 ;
 
 
     }
