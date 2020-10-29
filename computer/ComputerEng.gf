@@ -139,7 +139,7 @@ lin
    the_Det = mkDet the_Quant ;
    aPl_Det = mkDet a_Quant plNum ;
    thePl_Det = mkDet the_Quant plNum ;
-   this_Det = S.this_Det ;
+   this_Det =  ;
    these_Det = S.these_Det ;
    that_Det = S.that_Det ;
    those_Det = S.those_Det ;
