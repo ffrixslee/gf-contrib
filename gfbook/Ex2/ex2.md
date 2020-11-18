@@ -74,16 +74,84 @@ concrete FoodJap of Food = {
 ```
 
 # Exercise 2-4
-Try out translation and multilingual generation with FoodEng and FoodIta.
+Try out translation and multilingual generation with FoodEng and FoodIta.  
 
 # Exercise 2-5
 Define the reverse operation as a GF grammar by
-using one abstract syntax and two concrete syntaxes. Translation between the concrete syntaxes should read a sequence of symbols and return them in the opposite order. For instance, a b c is translated c
-b a.
+using one abstract syntax and two concrete syntaxes. Translation between the concrete syntaxes should read a sequence of symbols and return them in the opposite order. For instance, a b c is translated c b a. 
+
+```hs
+abstract Reverse = {
+  
+      flags startcat = Phrase ;
+  
+      cat
+        Phrase ; Item ; Kind ; Quality ;
+  
+      fun
+        Is : Item -> Quality -> Phrase ;
+        This, That : Kind -> Item ;
+        QKind : Quality -> Kind -> Kind ;
+        Very : Quality -> Quality ;
+        Wine, Cheese, Fish : Kind ;
+        Fresh, Warm, Italian, French, Expensive, Delicious, Boring, Clean, Weird : Quality ;
+    }
+
+--Normal phrase
+concrete Reverse1 of Reverse = {
+  
+      lincat
+        Phrase, Item, Kind, Quality = {s : Str} ;
+  
+      lin
+        Is item quality = {s = item.s ++ "is" ++ quality.s} ;
+        This kind = {s = "this" ++ kind.s} ;
+        That kind = {s = "that" ++ kind.s} ;
+        Wine = {s = "wine"} ;
+        Cheese = {s = "cheese"} ;
+        Fish = {s = "fish"} ;
+        Very quality = {s = "very" ++ quality.s} ;
+        QKind quality kind = {s = quality.s ++ kind.s} ;
+        Fresh = {s = "fresh"} ;
+        Warm = {s = "warm"} ;
+        Italian = {s = "Italian"} ;
+        French = {s = "French"} ;
+        Expensive = {s = "expensive"} ;
+        Delicious = {s = "delicious"} ;
+        Boring = {s = "boring"} ;
+        Clean = {s = "clean"} ;
+        Weird = {s = "weird"} ;
+    }
+
+--Reversed phrase
+concrete Reverse2 of Reverse = {
+  
+      lincat
+        Phrase, Item, Kind, Quality = {s : Str} ;
+  
+      lin
+        Is item quality = {s = quality.s ++ "is" ++ item.s} ;
+        This kind = {s = kind.s ++ "this"} ;
+        That kind = {s = kind.s ++ "that" } ;
+        Wine = {s = "wine"} ;
+        Cheese = {s = "cheese"} ;
+        Fish = {s = "fish"} ;
+        Very quality = {s = quality.s ++ "very"} ;
+        QKind quality kind = {s = kind.s ++ quality.s} ;
+        Fresh = {s = "fresh"} ;
+        Warm = {s = "warm"} ;
+        Italian = {s = "Italian"} ;
+        French = {s = "French"} ;
+        Expensive = {s = "expensive"} ;
+        Delicious = {s = "delicious"} ;
+        Boring = {s = "boring"} ;
+        Clean = {s = "clean"} ;
+        Weird = {s = "weird"} ;
+    }
+```
 
 # Exercise 2-6
-Write a grammar containing the rule in Figure 16 and,
-minimally, two names of stations. See all dierent alternatives by using linearization with the  flag -all in GF. Add more ways of requesting a ticket, for instance, I want to go from X to Y.
+Write a grammar containing the rule in Figure 16 and minimally, two names of stations. See all different alternatives by using linearization with the  flag -all in GF. Add more ways of requesting a ticket, for instance, I want to go from X to Y.
 
 
 lin Ticket X Y =
@@ -95,6 +163,41 @@ lin Ticket X Y =
 []) ++
 "from" ++ X ++ "to" ++ Y ++
 ("please" | []) ;
+
+```hs 
+abstract Tickets = {
+  
+      flags startcat = Booking ;
+  
+      cat
+        Booking ; BookTicket ; Station ;
+  
+      fun
+        Ticket : Station -> Station -> Booking ;
+        Barbican, Colindale, Leyton, Northwood : Station ;
+    }
+
+concrete TicketsEng of Tickets = {
+    
+    lincat
+        Booking, Station, BookTicket = {s : Str};
+
+    lin 
+        Ticket X Y = {s =        
+            ((("I" ++ ("would like" | "want") ++ "to get" |
+                ("may" | "can") ++ "I get" |
+                "can you give me" |
+                []) ++
+                    "a ticket") |
+                []) ++
+                "from" ++ X.s ++ "to" ++ Y.s ++
+                ("please" | []) };
+        Barbican = {s = "Barbican"} ;
+        Colindale = {s = "Colindale"} ;
+        Leyton = {s = "Leyton"};
+        Northwood = {s = "Northwood"};
+}
+```
 
 # Exercise 2-7
 Add negative predication to the Food grammar, expressed
