@@ -74,7 +74,13 @@ concrete FoodJap of Food = {
 ```
 
 # Exercise 2-4
-Try out translation and multilingual generation with FoodEng and FoodIta.  
+Try out translation and multilingual generation with FoodEng and FoodIta. 
+
+> p -lang=Eng "this wine is Italian" | l -lang=Ita
+> Food> gr -lang=Eng -tr| l -lang=Ita
+Pardon (That Cheese) Clean
+
+scusatemi , quel formaggio pulita ?
 
 # Exercise 2-5
 Define the reverse operation as a GF grammar by
@@ -201,11 +207,29 @@ concrete TicketsEng of Tickets = {
 
 # Exercise 2-7
 Add negative predication to the Food grammar, expressed
-by is not or isn't in English, and by non e in Italian.
+by is not or isn't in English, and by non e in Italian.
+English:
+```hs
+    isNot item quality = {s = item.s ++ ("isn't" | ("is" ++ "not")) ++ quality.s } ;
+```
+
+Italian:
+```hs
+    isNot item quality = {s = item.s ++ "non è" ++ quality.s } ;
+```
 
 # Exercise 2-8
 Add the with construction to the Food grammar, in both
 the ambiguous and the unambiguous versions.
+English: 
+```hs 
+        With kind1 kind2 = {s = kind1.s ++ "with" ++ kind2.s } ;
+```
+
+Italian:
+```hs
+    With kind1 kind2 = {s = kind1.s ++ "con" ++ kind2.s } ;
+```
 
 # Exercise 2-9
 How many trees are there for an expression of form

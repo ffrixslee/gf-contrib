@@ -6,6 +6,8 @@ concrete FoodIta of Food = {
   lin
     Pardon item quality = {s = "scusatemi" ++ "," ++ item.s ++ quality.s ++ "?"} ;
     Is item quality = {s = item.s ++ "è" ++ quality.s} ;
+    isNot item quality = {s = item.s ++ "non è" ++ quality.s } ;
+    With kind1 kind2 = {s = kind1.s ++ "con" ++ kind2.s } ;
     This kind = {s = "questo" ++ kind.s} ;
     That kind = {s = "quel" ++ kind.s} ;
     QKind quality kind = {s = kind.s ++ quality.s} ;

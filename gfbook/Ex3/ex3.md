@@ -2,22 +2,41 @@
 The type Bool with the values `True` and `False` is a useful parameter type in all programming, also frequently used in grammars.  
 Define this type and write tables of type `Bool => Bool => Bool` that compute the **conjunction** and **disjunction** of any two boolean values.
 
-Inari's ans:
+```hs 
+resource Booleans = {
 
-```hs
-# This default stack file is a copy of stack-ghc8.6.5.yaml
-# But committing a symlink is probably a bad idea, so it's a real copy
+  param
+    Bool = True | False ;
 
-resolver: lts-14.27 # ghc 8.6.5
-
-extra-deps:
-- network-2.6.3.6
-- httpd-shed-0.4.0.3
-- cgi-3001.5.0.0
+  oper 
+    
+    Booley : Type = Bool => Bool => Bool ;
+   boolTable : Booley =
+     table {
+       True  => table {True => True ; False => False} ;
+       False => table {True => False ; False => False}
+} ;
+} 
 ```
 
 # Exercise 3-1
-Continuing the exercise in Section 3.2, dene boolean \and" and \or" as opers of type Bool -> Bool -> Bool.
+Continuing the exercise in Section 3.2, define boolean "and" and "or" as opers of type Bool -> Bool -> Bool.
+```hs
+resource Booleans = {
+    param 
+      Bool = True | False ;
+
+    oper conj : Str -> {s : Bool => Str} =
+    \and -> {s = table {
+    True  => table {True => True ; False => True} 
+    } }
+
+    oper disj : Str -> {s : Bool => Str} =
+    \or -> {s = table {
+    False => table {True => True ; False => False}
+    } }
+}
+```
 
 # Exercise 3-2
 Define some other inflection functions, e.g. for English nouns of type fly - fies and Italian nouns of type vino - vini. What are the expected arguments of these functions?
