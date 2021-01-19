@@ -41,4 +41,7 @@ resource Booleans = {
 -- Exercise 3-2. Define some other inflection functions, e.g. for English nouns of type fly - flies and Italian nouns of type vino - vini. What are the expected arguments of these functions?
 
 oper infFly : Str -> {s : Number => Str} = 
-    \irrNoun -> {s = table {Sg => irrNoun ; Pl => irrNoun + "ies"}}
+    \fly -> {s = table {Sg => "fly" ; Pl => "flies"}}
+
+noun_y : Str -> Noun = \fly ->
+  mkNoun fly (init fly + "ies") ;

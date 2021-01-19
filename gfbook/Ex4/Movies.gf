@@ -1,4 +1,4 @@
-abstract Foods = {
+abstract Movies = {
   
       flags startcat = Comment ;
   
@@ -9,7 +9,7 @@ abstract Foods = {
         Pred : Item -> Quality -> Comment ;
         This, That, These, Those : Kind -> Item ;
         Mod : Quality -> Kind -> Kind ;
-        Wine, Cheese, Fish, Pizza : Kind ;
+        Movie, Romance, Horror, Thriller : Kind ;
         Very : Quality -> Quality ;
-        Fresh, Warm, Italian, Expensive, Delicious, Boring : Quality ;
+        Fresh, Warm, Scary, Sweet, Funny : Quality ;
     }

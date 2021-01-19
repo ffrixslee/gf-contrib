@@ -1,4 +1,4 @@
-concrete FoodsEng of Foods = open ResEng in {
+concrete MoviesEng of Movies = open ResEng in {
   lincat
     Comment, Quality = {s : Str} ;
     Kind = {s : Number => Str} ;
@@ -12,15 +12,14 @@ lin
   Those = det Pl "those" ;
   Mod quality kind =
     {s = \\n => quality.s ++ kind.s ! n} ;
-  Wine = regNoun "wine" ;
-  Cheese = regNoun "cheese" ;
-  Fish = noun "fish" "fish" ;
-  Pizza = regNoun "pizza" ;
+  Movie = regNoun "movie" ;
+  Horror = regNoun "horror" ;
+  Romance = regNoun "romance" ;
+  Thriller = regNoun "thriller" ;
   Very a = {s = "very" ++ a.s} ;
   Fresh = adj "fresh" ;
   Warm = adj "warm" ;
-  Italian = adj "Italian" ;
-  Expensive = adj "expensive" ;
-  Delicious = adj "delicious" ;
-  Boring = adj "boring" ;
+  Scary = adj "scary" ;
+  Sweet = adj "sweet" ;
+  Funny = adj "funny" ;
 }
