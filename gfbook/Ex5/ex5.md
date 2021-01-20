@@ -1,40 +1,144 @@
-Exercise 5-0. Compile the grammar FoodsREng and generate and parse some sentences.
-Exercise 5-1. Test if FoodsREng and the manually built FoodsEng
-given in Figure 21 in Section 3.5 yield exactly the same linearizations.
-You can do this systematically by importing these two grammar and
-then producing a set of trees and their linearizations by
-> generate_trees | linearize -treebank
-Exercise 5-2. Write a concrete syntax of Foods for Italian or some
-other language included in the resource library. You can compare the
-results with the hand-written grammars presented earlier in this tutorial.
+# Exercise 5-0
+Compile the grammar FoodsREng and generate and parse some sentences.  
 
---# -path=.:present
+```hs
+abstract Foods = {
+  
+      flags startcat = Comment ;
+  
+      cat
+        Comment ; Item ; Kind ; Quality ;
+  
+      fun
+        Pred : Item -> Quality -> Comment ;
+        This, That, These, Those : Kind -> Item ;
+        Mod : Quality -> Kind -> Kind ;
+        Wine, Cheese, Fish, Pizza : Kind ;
+        Very : Quality -> Quality ;
+        Fresh, Warm, Italian, Expensive, Delicious, Boring : Quality ;
+    }
+
+--#  -path=.:present
+
 concrete FoodsREng of Foods =
-open SyntaxEng,ParadigmsEng in {
-lincat
-Comment = Utt ;
-Item = NP ;
-Kind = CN ;
-Quality = AP ;
-lin
-Pred item quality = mkUtt (mkCl item quality) ;
-This kind = mkNP this_Det kind ;
-That kind = mkNP that_Det kind ;
-These kind = mkNP these_Det kind ;
-Those kind = mkNP those_Det kind ;
-Mod quality kind = mkCN quality kind ;
-Wine = mkCN (mkN "wine") ;
-Pizza = mkCN (mkN "pizza") ;
-Cheese = mkCN (mkN "cheese") ;
-Fish = mkCN (mkN "fish" "fish") ;
-Very quality = mkAP very_AdA quality ;
-Fresh = mkAP (mkA "fresh") ;
-Warm = mkAP (mkA "warm") ;
-Italian = mkAP (mkA "Italian") ;
-Expensive = mkAP (mkA "expensive") ;
-Delicious = mkAP (mkA "delicious") ;
-Boring = mkAP (mkA "boring") ;
-}
+    open SyntaxEng,ParadigmsEng in {
+    lincat
+      Comment = Utt ;
+      Item = NP ;
+      Kind = CN ;
+      Quality = AP ;
+    lin
+      Pred item quality = mkUtt (mkCl item quality) ;
+      This kind = mkNP this_Det kind ;
+      That kind = mkNP that_Det kind ;
+      These kind = mkNP these_Det kind ;
+      Those kind = mkNP those_Det kind ;
+      Mod quality kind = mkCN quality kind ;
+      Wine = mkCN (mkN "wine") ;
+      Pizza = mkCN (mkN "pizza") ;
+      Cheese = mkCN (mkN "cheese") ; 
+      Fish = mkCN (mkN "fish" "fish") ;
+      Very quality = mkAP very_AdA quality ;
+      Fresh = mkAP (mkA "fresh") ;
+      Warm = mkAP (mkA "warm") ;
+      Italian = mkAP (mkA "Italian") ;
+      Expensive = mkAP (mkA "expensive") ;
+      Delicious = mkAP (mkA "delicious") ;
+      Boring = mkAP (mkA "boring") ;
+    }
+```
+Command:  
+`Foods> gr -tr -number=10 | l`  
+
+Pred (This Fish) Boring  
+> this fish is boring  
+
+Pred (These Cheese) Delicious  
+> these cheeses are delicious  
+
+Pred (This Cheese) Boring  
+> this cheese is boring  
+
+Pred (That Pizza) Expensive  
+> that pizza is expensive  
+
+Pred (That Wine) Italian  
+> that wine is Italian  
+
+Pred (This Pizza) Fresh  
+> this pizza is fresh  
+
+Pred (This Wine) Warm  
+> this wine is warm  
+
+Pred (That Cheese) Expensive  
+> that cheese is expensive  
+
+Pred (These Wine) Expensive  
+> these wines are expensive  
+
+Pred (Those Fish) (Very Boring)  
+> those fish are very boring
+
+# Exercise 5-1.
+Test if FoodsREng and the manually built FoodsEng given in Figure 21 in Section 3.5 yield exactly the same linearizations.  
+You can do this systematically by importing these two grammar and then producing a set of trees and their linearizations by:  
+> generate_trees | linearize -treebank
+
+Foods: Pred (That Cheese) Boring  
+FoodsEng: that cheese is boring  
+FoodsREng: that cheese is boring  
+Foods: Pred (That Cheese) Delicious  
+FoodsEng: that cheese is delicious  
+FoodsREng: that cheese is delicious  
+Foods: Pred (That Cheese) Expensive  
+FoodsEng: that cheese is expensive  
+FoodsREng: that cheese is expensive  
+Foods: Pred (That Cheese) Fresh  
+FoodsEng: that cheese is fresh  
+FoodsREng: that cheese is fresh  
+Foods: Pred (That Cheese) Italian  
+FoodsEng: that cheese is Italian  
+FoodsREng: that cheese is Italian  
+Foods: Pred (That Cheese) (Very Boring)  
+FoodsEng: that cheese is very boring  
+FoodsREng: that cheese is very boring  
+
+# Exercise 5-2 
+Write a concrete syntax of Foods for Italian or some
+other language included in the resource library. You can compare the results with the hand-written grammars presented earlier in this tutorial.  
+
+**Italian:**
+```hs 
+--#  -path=.:present
+
+concrete FoodsRIta of Foods =
+    open SyntaxIta,ParadigmsIta in {
+    lincat
+      Comment = Utt ;
+      Item = NP ;
+      Kind = CN ;
+      Quality = AP ;
+    lin
+      Pred item quality = mkUtt (mkCl item quality) ;
+      This kind = mkNP this_Det kind ;
+      That kind = mkNP that_Det kind ;
+      These kind = mkNP these_Det kind ;
+      Those kind = mkNP those_Det kind ;
+      Mod quality kind = mkCN quality kind ;
+      Wine = mkCN (mkN "vino") ;
+      Pizza = mkCN (mkN "pizza") ;
+      Cheese = mkCN (mkN "formaggio") ; 
+      Fish = mkCN (mkN "pesce") ;
+      Very quality = mkAP very_AdA quality ;
+      Fresh = mkAP (mkA "fresco") ;
+      Warm = mkAP (mkA "caldo") ;
+      Italian = mkAP (mkA "Italiano") ;
+      Expensive = mkAP (mkA "costoso") ;
+      Delicious = mkAP (mkA "delicious") ;
+      Boring = mkAP (mkA "noioso") ;
+    }
+```
 
 Exercise 5-3. Instantiate the functor FoodsI to some language of your
 choice.
