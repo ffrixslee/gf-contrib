@@ -7,6 +7,7 @@ abstract Foods = {
   
       fun
         Pred : Item -> Quality -> Comment ;
+        ILike : Item -> Comment ;
         This, That, These, Those : Kind -> Item ;
         Mod : Quality -> Kind -> Kind ;
         Wine, Cheese, Fish, Pizza : Kind ;

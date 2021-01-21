@@ -4,6 +4,7 @@ concrete FoodsEng of Foods = {
       Kind = {s : Number => Str} ;
       Item = {s : Str ; n : Number} ;
     lin
+      ILike it = {s = "I like" ++ it.s } ;
       Pred item quality = 
           {s = item.s ++ copula ! item.n ++ quality.s} ;
       This = det Sg "this" ;
