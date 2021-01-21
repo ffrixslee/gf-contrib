@@ -1,0 +1,6 @@
+digraph {
+  rankdir=LR ;
+  node [shape = record] ;
+   
+  struct0[label = "<n0> this | <n1> cheese | <n2> is | <n3> boring"] ;
+}
