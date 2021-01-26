@@ -1,3 +1,5 @@
+> learn how more about fd command in the commandline
+
 # Exercise 5-0
 Compile the grammar FoodsREng and generate and parse some sentences.  
 
@@ -377,26 +379,69 @@ concrete FoodsEng of Foods = {
 ```
 
 # Exercise 5-7. Test word alignment (as explained in Section 2.14) with grammar rules that perform compile-time transfer.
-Languages:
-> i FoodsEng.gf
+
+```hs
+> i Foods.gf FoodsEng.gf FoodsIta.gf
 linking ... OK
+Languages: FoodsEng FoodsIta
+Foods> p -lang=Eng "this fish is fresh" |  aw -view=open
+```
 
-Languages: FoodsEng
-4 msec
-Foods> gr -number=5 | l
-I like these warm wines
-those fish are fresh
-I like these fish
-these cheeses are warm
-these pizzas are warm
+# Exercise 5-8.
+Construct some expressions and their translations by
+parsing and linearizing in the resource library:  
+- is this wine good 
+` PhrUtt NoPConj (UttQS (UseQCl (TTAnt TPres ASimul) PPos (QuestCl (PredVP (DetCN (DetQuant this_Quant NumSg) (UseN wine_N)) (UseComp (CompAP (PositA good_A))))))) NoVoc`
 
+- I (don't) like this wine, do you like this wine  
+- I want wine, I would like to have wine  
+- I know that this wine is bad  
+`PhrUtt NoPConj (UttS (UseCl (TTAnt TPres ASimul) PPos (PredVP (UsePron i_Pron) (ComplVS know_VS (UseCl (TTAnt TPres ASimul) PPos (PredVP (DetCN (DetQuant this_Quant NumSg) (UseN wine_N)) (UseComp (CompAP (PositA bad_A))))))))) NoVoc
+PhrUtt NoPConj (UttS (UseCl (TTAnt TPres ASimul) PPos (PredVP (UsePron i_Pron) (AdvVP (ComplSlash (SlashV2a know_V2) (DetNP (DetQuant IndefArt NumPl))) (SubjS that_Subj (UseCl (TTAnt TPres ASimul) PPos (PredVP (DetCN (DetQuant this_Quant NumSg) (UseN wine_N)) (UseComp (CompAP (PositA bad_A)))))))))) NoVoc
+PhrUtt NoPConj (UttS (UseCl (TTAnt TPres ASimul) PPos (PredVP (UsePron i_Pron) (ComplSlash (SlashV2a know_V2) (AdvNP (DetNP (DetQuant IndefArt NumPl)) (SubjS that_Subj (UseCl (TTAnt TPres ASimul) PPos (PredVP (DetCN (DetQuant this_Quant NumSg) (UseN wine_N)) (UseComp (CompAP (PositA bad_A))))))))))) NoVoc
+PhrUtt NoPConj (UttS (UseCl (TTAnt TPres ASimul) PPos (PredVP (UsePron i_Pron) (ComplSlash (AdvVPSlash (SlashV2a know_V2) (SubjS that_Subj (UseCl (TTAnt TPres ASimul) PPos (PredVP (DetCN (DetQuant this_Quant NumSg) (UseN wine_N)) (UseComp (CompAP (PositA bad_A))))))) (DetNP (DetQuant IndefArt NumPl)))))) NoVoc`
 
-Exercise 5-8. Construct some expressions and their translations by
-parsing and linearizing in the resource library: . is this wine good . I (don't) like this wine, do you like this wine . I want wine, I would like to have wine . I know that this wine is bad . can you give me wine
+- can you give me wine  
+`PhrUtt NoPConj (UttQS (UseQCl (TTAnt TPres ASimul) PPos (QuestCl (PredVP (UsePron youPol_Pron) (ComplSlash (SlashVV can8know_VV (Slash2V3 give_V3 (UsePron i_Pron))) (MassNP (ApposCN (UseN wine_N) (DetNP (DetQuant IndefArt NumPl))))))))) NoVoc
+PhrUtt NoPConj (UttQS (UseQCl (TTAnt TPres ASimul) PPos (QuestCl (PredVP (UsePron youPol_Pron) (ComplSlash (SlashVV can8know_VV (Slash2V3 give_V3 (UsePron i_Pron))) (MassNP (UseN wine_N))))))) NoVoc
+PhrUtt NoPConj (UttQS (UseQCl (TTAnt TPres ASimul) PPos (QuestCl (PredVP (UsePron youPol_Pron) (ComplSlash (SlashVV can_VV (Slash2V3 give_V3 (UsePron i_Pron))) (MassNP (ApposCN (UseN wine_N) (DetNP (DetQuant IndefArt NumPl))))))))) NoVoc
+PhrUtt NoPConj (UttQS (UseQCl (TTAnt TPres ASimul) PPos (QuestCl (PredVP (UsePron youPol_Pron) (ComplSlash (SlashVV can_VV (Slash2V3 give_V3 (UsePron i_Pron))) (MassNP (UseN wine_N))))))) NoVoc
+PhrUtt NoPConj (UttQS (UseQCl (TTAnt TPres ASimul) PPos (QuestCl (PredVP (UsePron youPol_Pron) (ComplVV can8know_VV (ComplSlash (Slash2V3 give_V3 (UsePron i_Pron)) (MassNP (ApposCN (UseN wine_N) (DetNP (DetQuant IndefArt NumPl)))))))))) NoVoc
+PhrUtt NoPConj (UttQS (UseQCl (TTAnt TPres ASimul) PPos (QuestCl (PredVP (UsePron youPol_Pron) (ComplVV can8know_VV (ComplSlash (Slash2V3 give_V3 (UsePron i_Pron)) (MassNP (UseN wine_N)))))))) NoVoc
+PhrUtt NoPConj (UttQS (UseQCl (TTAnt TPres ASimul) PPos (QuestCl (PredVP (UsePron youPol_Pron) (ComplVV can8know_VV (ComplSlash (Slash3V3 give_V3 (MassNP (ApposCN (UseN wine_N) (DetNP (DetQuant IndefArt NumPl))))) (UsePron i_Pron))))))) NoVoc
+PhrUtt NoPConj (UttQS (UseQCl (TTAnt TPres ASimul) PPos (QuestCl (PredVP (UsePron youPol_Pron) (ComplVV can8know_VV (ComplSlash (Slash3V3 give_V3 (MassNP (UseN wine_N))) (UsePron i_Pron))))))) NoVoc
+PhrUtt NoPConj (UttQS (UseQCl (TTAnt TPres ASimul) PPos (QuestCl (PredVP (UsePron youPol_Pron) (ComplVV can_VV (ComplSlash (Slash2V3 give_V3 (UsePron i_Pron)) (MassNP (ApposCN (UseN wine_N) (DetNP (DetQuant IndefArt NumPl)))))))))) NoVoc
+PhrUtt NoPConj (UttQS (UseQCl (TTAnt TPres ASimul) PPos (QuestCl (PredVP (UsePron youPol_Pron) (ComplVV can_VV (ComplSlash (Slash2V3 give_V3 (UsePron i_Pron)) (MassNP (UseN wine_N)))))))) NoVoc
+PhrUtt NoPConj (UttQS (UseQCl (TTAnt TPres ASimul) PPos (QuestCl (PredVP (UsePron youPol_Pron) (ComplVV can_VV (ComplSlash (Slash3V3 give_V3 (MassNP (ApposCN (UseN wine_N) (DetNP (DetQuant IndefArt NumPl))))) (UsePron i_Pron))))))) NoVoc
+PhrUtt NoPConj (UttQS (UseQCl (TTAnt TPres ASimul) PPos (QuestCl (PredVP (UsePron youPol_Pron) (ComplVV can_VV (ComplSlash (Slash3V3 give_V3 (MassNP (UseN wine_N))) (UsePron i_Pron))))))) NoVoc
+PhrUtt NoPConj (UttQS (UseQCl (TTAnt TPres ASimul) PPos (QuestCl (PredVP (UsePron youSg_Pron) (ComplSlash (SlashVV can8know_VV (Slash2V3 give_V3 (UsePron i_Pron))) (MassNP (ApposCN (UseN wine_N) (DetNP (DetQuant IndefArt NumPl))))))))) NoVoc
+PhrUtt NoPConj (UttQS (UseQCl (TTAnt TPres ASimul) PPos (QuestCl (PredVP (UsePron youSg_Pron) (ComplSlash (SlashVV can8know_VV (Slash2V3 give_V3 (UsePron i_Pron))) (MassNP (UseN wine_N))))))) NoVoc
+PhrUtt NoPConj (UttQS (UseQCl (TTAnt TPres ASimul) PPos (QuestCl (PredVP (UsePron youSg_Pron) (ComplSlash (SlashVV can_VV (Slash2V3 give_V3 (UsePron i_Pron))) (MassNP (ApposCN (UseN wine_N) (DetNP (DetQuant IndefArt NumPl))))))))) NoVoc
+PhrUtt NoPConj (UttQS (UseQCl (TTAnt TPres ASimul) PPos (QuestCl (PredVP (UsePron youSg_Pron) (ComplSlash (SlashVV can_VV (Slash2V3 give_V3 (UsePron i_Pron))) (MassNP (UseN wine_N))))))) NoVoc
+PhrUtt NoPConj (UttQS (UseQCl (TTAnt TPres ASimul) PPos (QuestCl (PredVP (UsePron youSg_Pron) (ComplVV can8know_VV (ComplSlash (Slash2V3 give_V3 (UsePron i_Pron)) (MassNP (ApposCN (UseN wine_N) (DetNP (DetQuant IndefArt NumPl)))))))))) NoVoc
+PhrUtt NoPConj (UttQS (UseQCl (TTAnt TPres ASimul) PPos (QuestCl (PredVP (UsePron youSg_Pron) (ComplVV can8know_VV (ComplSlash (Slash2V3 give_V3 (UsePron i_Pron)) (MassNP (UseN wine_N)))))))) NoVoc
+PhrUtt NoPConj (UttQS (UseQCl (TTAnt TPres ASimul) PPos (QuestCl (PredVP (UsePron youSg_Pron) (ComplVV can8know_VV (ComplSlash (Slash3V3 give_V3 (MassNP (ApposCN (UseN wine_N) (DetNP (DetQuant IndefArt NumPl))))) (UsePron i_Pron))))))) NoVoc
+PhrUtt NoPConj (UttQS (UseQCl (TTAnt TPres ASimul) PPos (QuestCl (PredVP (UsePron youSg_Pron) (ComplVV can8know_VV (ComplSlash (Slash3V3 give_V3 (MassNP (UseN wine_N))) (UsePron i_Pron))))))) NoVoc
+PhrUtt NoPConj (UttQS (UseQCl (TTAnt TPres ASimul) PPos (QuestCl (PredVP (UsePron youSg_Pron) (ComplVV can_VV (ComplSlash (Slash2V3 give_V3 (UsePron i_Pron)) (MassNP (ApposCN (UseN wine_N) (DetNP (DetQuant IndefArt NumPl)))))))))) NoVoc
+PhrUtt NoPConj (UttQS (UseQCl (TTAnt TPres ASimul) PPos (QuestCl (PredVP (UsePron youSg_Pron) (ComplVV can_VV (ComplSlash (Slash2V3 give_V3 (UsePron i_Pron)) (MassNP (UseN wine_N)))))))) NoVoc
+PhrUtt NoPConj (UttQS (UseQCl (TTAnt TPres ASimul) PPos (QuestCl (PredVP (UsePron youSg_Pron) (ComplVV can_VV (ComplSlash (Slash3V3 give_V3 (MassNP (ApposCN (UseN wine_N) (DetNP (DetQuant IndefArt NumPl))))) (UsePron i_Pron))))))) NoVoc
+PhrUtt NoPConj (UttQS (UseQCl (TTAnt TPres ASimul) PPos (QuestCl (PredVP (UsePron youSg_Pron) (ComplVV can_VV (ComplSlash (Slash3V3 give_V3 (MassNP (UseN wine_N))) (UsePron i_Pron))))))) NoVoc
+PhrUtt NoPConj (UttQS (UseQCl (TTAnt TPres ASimul) PPos (QuestCl (PredVP (UsePron youPl_Pron) (ComplSlash (SlashVV can8know_VV (Slash2V3 give_V3 (UsePron i_Pron))) (MassNP (ApposCN (UseN wine_N) (DetNP (DetQuant IndefArt NumPl))))))))) NoVoc
+PhrUtt NoPConj (UttQS (UseQCl (TTAnt TPres ASimul) PPos (QuestCl (PredVP (UsePron youPl_Pron) (ComplSlash (SlashVV can8know_VV (Slash2V3 give_V3 (UsePron i_Pron))) (MassNP (UseN wine_N))))))) NoVoc
+PhrUtt NoPConj (UttQS (UseQCl (TTAnt TPres ASimul) PPos (QuestCl (PredVP (UsePron youPl_Pron) (ComplSlash (SlashVV can_VV (Slash2V3 give_V3 (UsePron i_Pron))) (MassNP (ApposCN (UseN wine_N) (DetNP (DetQuant IndefArt NumPl))))))))) NoVoc
+PhrUtt NoPConj (UttQS (UseQCl (TTAnt TPres ASimul) PPos (QuestCl (PredVP (UsePron youPl_Pron) (ComplSlash (SlashVV can_VV (Slash2V3 give_V3 (UsePron i_Pron))) (MassNP (UseN wine_N))))))) NoVoc
+PhrUtt NoPConj (UttQS (UseQCl (TTAnt TPres ASimul) PPos (QuestCl (PredVP (UsePron youPl_Pron) (ComplVV can8know_VV (ComplSlash (Slash2V3 give_V3 (UsePron i_Pron)) (MassNP (ApposCN (UseN wine_N) (DetNP (DetQuant IndefArt NumPl)))))))))) NoVoc
+PhrUtt NoPConj (UttQS (UseQCl (TTAnt TPres ASimul) PPos (QuestCl (PredVP (UsePron youPl_Pron) (ComplVV can8know_VV (ComplSlash (Slash2V3 give_V3 (UsePron i_Pron)) (MassNP (UseN wine_N)))))))) NoVoc
+PhrUtt NoPConj (UttQS (UseQCl (TTAnt TPres ASimul) PPos (QuestCl (PredVP (UsePron youPl_Pron) (ComplVV can8know_VV (ComplSlash (Slash3V3 give_V3 (MassNP (ApposCN (UseN wine_N) (DetNP (DetQuant IndefArt NumPl))))) (UsePron i_Pron))))))) NoVoc
+PhrUtt NoPConj (UttQS (UseQCl (TTAnt TPres ASimul) PPos (QuestCl (PredVP (UsePron youPl_Pron) (ComplVV can8know_VV (ComplSlash (Slash3V3 give_V3 (MassNP (UseN wine_N))) (UsePron i_Pron))))))) NoVoc
+PhrUtt NoPConj (UttQS (UseQCl (TTAnt TPres ASimul) PPos (QuestCl (PredVP (UsePron youPl_Pron) (ComplVV can_VV (ComplSlash (Slash2V3 give_V3 (UsePron i_Pron)) (MassNP (ApposCN (UseN wine_N) (DetNP (DetQuant IndefArt NumPl)))))))))) NoVoc
+PhrUtt NoPConj (UttQS (UseQCl (TTAnt TPres ASimul) PPos (QuestCl (PredVP (UsePron youPl_Pron) (ComplVV can_VV (ComplSlash (Slash2V3 give_V3 (UsePron i_Pron)) (MassNP (UseN wine_N)))))))) NoVoc
+PhrUtt NoPConj (UttQS (UseQCl (TTAnt TPres ASimul) PPos (QuestCl (PredVP (UsePron youPl_Pron) (ComplVV can_VV (ComplSlash (Slash3V3 give_V3 (MassNP (ApposCN (UseN wine_N) (DetNP (DetQuant IndefArt NumPl))))) (UsePron i_Pron))))))) NoVoc
+PhrUtt NoPConj (UttQS (UseQCl (TTAnt TPres ASimul) PPos (QuestCl (PredVP (UsePron youPl_Pron) (ComplVV can_VV (ComplSlash (Slash3V3 give_V3 (MassNP (UseN wine_N))) (UsePron i_Pron))))))) NoVoc`
 
-Exercise 5-9.+ Extend the Foods grammar with new forms of expressions,
-corresponding to the examples of the previous exercise. First
-extend the abstract syntax, then implement it by using the resource
+# Exercise 5-9.+
+Extend the Foods grammar with new forms of expressions,
+corresponding to the examples of the previous exercise. First extend the abstract syntax, then implement it by using the resource
 grammar and a functor. You can also try to minimize the size of the
 abstract syntax by using free variation as explained in Section 2.11. For
 instance, I would like to have X, give me X, can you give me X, and X

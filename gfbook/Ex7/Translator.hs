@@ -1,7 +1,7 @@
 module Main where
 
 import PGF
-import System (getArgs)
+import System.Environment (getArgs)
 
 main :: IO ()
 main = do

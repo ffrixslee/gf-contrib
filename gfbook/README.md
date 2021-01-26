@@ -9,6 +9,10 @@ Chapter 5:
 
 - [ ] Check that my solution for ex 5-5 is correct.
 - [ ] What are some other constructs where compile-time transfer is necessary ?
+- What is meant by flattening of constructions ? Is it something like point-free function composition in Haskell ?
+- section 5-18: how to handle contracted (ie, don't) statements ?
+- [ ] Need to brush up on extending grammars 
+- [ ] Learn how to linearize Kind 
 
 Chapter 7: 
 - [ ] Learn how to convert other grammars to .pgf
