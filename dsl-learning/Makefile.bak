@@ -1,0 +1,47 @@
+JAVAC=javac
+JAVAC_FLAGS=-sourcepath .
+JAVA=java
+JAVA_FLAGS=
+PARSER=${JAVA} ${JAVA_FLAGS} java_cup.Main
+PARSER_FLAGS=-nopositions -expect 100
+LEXER=${JAVA} ${JAVA_FLAGS} JLex.Main
+LEXER_FLAGS=
+all : test
+
+test : absyn calc/Yylex.class calc/PrettyPrinter.class calc/Test.class calc/VisitSkel.class calc/ComposVisitor.class calc/AbstractVisitor.class calc/FoldVisitor.class calc/AllVisitor.class calc/parser.class calc/sym.class calc/Test.class
+
+.PHONY : absyn
+
+%.class : %.java
+	${JAVAC} ${JAVAC_FLAGS} $^
+
+absyn : calc/Absyn/Exp.java calc/Absyn/EAdd.java calc/Absyn/ESub.java calc/Absyn/EMul.java calc/Absyn/EDiv.java calc/Absyn/EInt.java
+	${JAVAC} ${JAVAC_FLAGS} $^
+
+calc/Yylex.java : calc/Yylex
+	${LEXER} ${LEXER_FLAGS} calc/Yylex
+
+calc/parser.java calc/sym.java : calc/_cup.cup
+	${PARSER} ${PARSER_FLAGS} calc/_cup.cup
+	mv parser.java sym.java calc/
+
+calc/Yylex.class : calc/Yylex.java calc/parser.java calc/sym.java
+
+calc/sym.class : calc/sym.java
+
+calc/parser.class : calc/parser.java calc/sym.java
+
+calc/PrettyPrinter.class : calc/PrettyPrinter.java
+
+clean :
+	rm -f calc/Absyn/*.class calc/*.class
+
+distclean : vclean
+
+vclean :
+	 rm -f calc/Absyn/Exp.java calc/Absyn/EAdd.java calc/Absyn/ESub.java calc/Absyn/EMul.java calc/Absyn/EDiv.java calc/Absyn/EInt.java calc/Absyn/Exp.class calc/Absyn/EAdd.class calc/Absyn/ESub.class calc/Absyn/EMul.class calc/Absyn/EDiv.class calc/Absyn/EInt.class
+	 rm -f calc/Absyn/*.class
+	 rmdir calc/Absyn/
+	 rm -f calc/Yylex calc/_cup.cup calc/Yylex.java calc/VisitSkel.java calc/ComposVisitor.java calc/AbstractVisitor.java calc/FoldVisitor.java calc/AllVisitor.java calc/PrettyPrinter.java calc/Skeleton.java calc/Test.java calc/parser.java calc/sym.java calc/*.class
+	 rm -f Makefile
+	 rmdir -p calc/
