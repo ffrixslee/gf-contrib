@@ -1,0 +1,24 @@
+-- A program is a sequence of definitions.
+PDefs. Program ::= [Def] ;
+
+terminator Def "" ;
+
+-- A program may contain comments, which are ignored by the parser.
+comment "//" ;
+comment "/*" "*/" ;
+
+-- A function definition has a type, a name, an argument list, and a body. An argument list is a comma-separated of argument declarations enclosed in parentheses ( and ). A function body is a list of statements enclosed in curly brackets { and } .
+int foo(double x, int y)
+{
+    return y + 9 ;
+}
+
+DFun. Def ::= Type Id "(" [Arg] ")" "{" [Stm] "}" ;
+separator Arg "," ;
+terminator Stm "" ;
+
+-- An argument declaration has a type and an identifier.
+ADecl. Arg ::= Type Id ;
+
+-- Any expressions followed by a semicolon ; can be used as a statement.
+SExp. Stm ::= Exp ";" ;
