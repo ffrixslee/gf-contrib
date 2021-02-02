@@ -1,4 +1,5 @@
 abstract Arithm = { 
+    flags startcat = Prop ;
     cat
       Prop ; -- proposition 
       Nat  ; -- natural number
@@ -7,4 +8,5 @@ abstract Arithm = {
       Succ : Nat -> Nat ; -- the successor of x
       Even : Nat -> Prop ; -- x is even
       And : Prop -> Prop -> Prop ; -- A and B
+      X, Y : Nat ;
 }

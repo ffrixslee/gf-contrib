@@ -378,6 +378,43 @@ concrete FoodsEng of Foods = {
 }
 ```
 
+**FoodsIta.gf**
+```hs
+concrete FoodsIta of Foods = open ResIta in {
+  lincat
+    Comment = {s : Str} ;
+    Quality = Adjective ;
+    Kind = Noun ;
+    Item = NounPhrase ;
+  lin
+    ILike it = {s = "Mi piace" ++ it.s } ;
+    Pred item quality =
+      {s = item.s ++ copula ! item.n ++
+           quality.s ! item.g ! item.n} ;
+    This = det Sg "questo" "questa" ;
+    That = det Sg "quel" "quella" ;
+    These = det Pl "questi" "queste" ;
+    Those = det Pl "quei" "quelle" ;
+    Mod quality kind = {
+      s = \\n => kind.s ! n ++ quality.s ! kind.g ! n ;
+      g = kind.g
+      } ;
+    Wine = noun "vino" "vini" Masc ;
+    Cheese = noun "formaggio" "formaggi" Masc ;
+    Fish = noun "pesce" "pesci" Masc ;
+    Pizza = noun "pizza" "pizze" Fem ;
+    Very qual =
+      {s = \\g,n => "molto" ++ qual.s ! g ! n} ;
+    Fresh =
+      adjective "fresco" "fresca" "freschi" "fresche" ;
+    Warm = regAdj "caldo" ;
+    Italian = regAdj "italiano" ;
+    Expensive = regAdj "caro" ;
+    Delicious = regAdj "delizioso" ;
+    Boring = regAdj "noioso" ;
+}
+```
+
 # Exercise 5-7. Test word alignment (as explained in Section 2.14) with grammar rules that perform compile-time transfer.
 
 ```hs
@@ -441,14 +478,21 @@ PhrUtt NoPConj (UttQS (UseQCl (TTAnt TPres ASimul) PPos (QuestCl (PredVP (UsePro
 
 # Exercise 5-9.+
 Extend the Foods grammar with new forms of expressions,
-corresponding to the examples of the previous exercise. First extend the abstract syntax, then implement it by using the resource
-grammar and a functor. You can also try to minimize the size of the
-abstract syntax by using free variation as explained in Section 2.11. For
-instance, I would like to have X, give me X, can you give me X, and X
-can be variant expressions for one and the same order.
-Exercise 5-10.+ Design a small grammar that can be used for controlling
-an MP3 player. The grammar should be able to recognize commands
-such as play this song, with the following variations: . objects: song, artist . modiers: this, the next, the previous . verbs with complements: play, remove . verbs without complements: stop, pause
+corresponding to the examples of the previous exercise. First extend the abstract syntax, then implement it by using the resource grammar and a functor.  
+
+You can also try to minimize the size of the
+abstract syntax by using free variation as explained in Section 2.11.  
+
+For instance, I would like to have X, give me X, can you give me X, and X can be variant expressions for one and the same order.  
+
+# Exercise 5-10.+
+Design a small grammar that can be used for controlling
+an MP3 player. The grammar should be able to recognize commands such as play this song, with the following variations:  
+- objects: song, artist  
+- modifiers: this, the next, the previous  
+- verbs with complements: play, remove  
+- verbs without complements: stop, pause  
+
 The implementation goes in the following phases:
 1. abstract syntax
 2. functor and lexicon interface
@@ -457,6 +501,7 @@ The implementation goes in the following phases:
 5. lexicon instance for the second language
 6. functor instantiation for the second language
 7. . . .
+
 Exercise 5-11.* Records of resource categories give a natural way to
 represent families of words that belong together. One example is the
 complex we might call Action, which involves a transitive verb (play),

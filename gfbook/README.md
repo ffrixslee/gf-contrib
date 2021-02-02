@@ -7,12 +7,17 @@ Chapter 5:
 > Clauses can be used in utterances in many ways.
 > Utt is a good start category in application grammars, because it covers many of the things one may want to express.
 
-- [ ] Check that my solution for ex 5-5 is correct.
-- [ ] What are some other constructs where compile-time transfer is necessary ?
+- [x] Check that my solution for ex 5-5 is correct.  
+- [ ] What are some other constructs where compile-time transfer is necessary ?  
 - What is meant by flattening of constructions ? Is it something like point-free function composition in Haskell ?
-- section 5-18: how to handle contracted (ie, don't) statements ?
+- [x] section 5-18: how to handle contracted (ie, don't) statements ? Solution: refer to RGL and GF Synopsis (API).
 - [ ] Need to brush up on extending grammars 
 - [ ] Learn how to linearize Kind 
+- [ ] How to define a new Determiner in the the lincat (ie the next, the previous)
+
+Chapter 6:
+- [ ] Ex 6-1: They said preferably using the RGL but how? 
+- Learned that you can use wildcard('_') or omit arguments for non-dependent types
 
 Chapter 7: 
 - [ ] Learn how to convert other grammars to .pgf

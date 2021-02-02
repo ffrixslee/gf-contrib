@@ -5,6 +5,7 @@ concrete FoodsIta of Foods = open ResIta in {
     Kind = Noun ;
     Item = NounPhrase ;
   lin
+    ILike it = {s = "Mi piace" ++ it.s } ;
     Pred item quality =
       {s = item.s ++ copula ! item.n ++
            quality.s ! item.g ! item.n} ;

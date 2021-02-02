@@ -1,35 +1,120 @@
-Exercise 6-0. Give a concrete syntax of Arithm, preferably by using
-the resource library.
+# Exercise 6-0
+Give a concrete syntax of Arithm, preferably by using the resource library.  
 
-Exercise 6-1.Write an abstract syntax module with the contents above
-and an appropriate English concrete syntax. Try out parsing and generation.
-Exercise 6-2. Add some device kinds and actions to the grammar.
-Exercise 6-3.* Dene some rules involving agreement in abstract syntax
-by using dependent types|for instance, the number agreement
-in NP-VP predication in English. To this end, you need to introduce
-Number as a type in the abstract syntax and make NP and VP dependent
-on it.
-Exercise 6-4.*+ In the GF resource grammar library, there are several
-categories of verbs|V, V2, V3, VS, etc|and corresponding complementation
-rules for building verb phrases; see Section 5.15 and Appendix
-D. An alternative analysis, perhaps more elegant, would be to have just
-one category of verbs, but make it dependent on another category, say
-VSub, which is the type of verb subcategorizations. We would also need
-a type of actual complement lists, say Comps, dependent on VSub. With
-this machinery, just one complementation rule is needed, of type
-(vs : VSub) -> V vs -> Comps vs -> VP
-Work out the details of this idea, covering at least the four verb categories
-listed above.
+```hs
+Abstract syntax:
+
+abstract Arithm = { 
+    flags startcat = Prop ;
+    cat
+      Prop ; -- proposition 
+      Nat  ; -- natural number
+    fun 
+      Zero : Nat ; -- 0
+      Succ : Nat -> Nat ; -- the successor of x
+      Even : Nat -> Prop ; -- x is even
+      And : Prop -> Prop -> Prop ; -- A and B
+      X, Y : Nat ;
+}
+
+Concrete syntax:
+
+concrete ArithmEng of Arithm = open SyntaxEng, ParadigmsEng in {
+
+    lincat
+      Prop, Nat = Str ;
+    
+    lin 
+      Zero =  "zero" ;
+      Succ x = "the successor of" ++ x ;
+      Even x = x ++ "is even" ;
+      And x y = x ++ "and" ++ y ;
+      X = "x" ;
+      Y = "y" ;
+}
+```
+
+# Exercise 6-1
+Write an abstract syntax module with the contents above and an appropriate English concrete syntax. Try out parsing and generation.
+```hs 
+Abstract syntax:
+abstract SmartHouse = {
+    flags startcat = Command ;
+
+    cat
+      Command ;
+      Kind ;
+      Device Kind ;
+      Action Kind ;
+    
+    fun 
+      Act : (k : Kind) -> Action k -> Device k -> Command ;
+      The : (k : Kind) -> Device k ; -- the light
+      Light, Fan : Kind ;
+      Dim : Action Light ;
+}
+
+Concrete syntax:
+concrete SmartHouseEng of SmartHouse = open SyntaxEng, ParadigmsEng, Prelude in {
+    lincat
+      Command, Device, Kind, Action = {s : Str} ;
+    
+    lin
+      Act _ act dev = {s = act.s ++ dev.s} ;
+      The kind = {s = "The" ++ kind.s} ;
+      Dim = {s = "dim"} ;
+      -- argument for Kind does not appear in the linearization;
+      -- type checker can reconstruct the kind from the dev argument (technique of suppression)
+      Light = {s = "light"} ;
+      Fan = {s = "fan"} ;
+}
+```
+
+# Exercise 6-2
+Add some device kinds and actions to the grammar.  
+```hs
+Abstract syntax:
+abstract SmartHouse = {
+    flags startcat = Command ;
+
+    cat
+      Command ;
+      Kind ;
+      Device Kind ;
+      Action Kind ;
+    
+    fun 
+      Act : (k : Kind) -> Action k -> Device k -> Command ;
+      The : (k : Kind) -> Device k ; -- the light
+      Light, Fan : Kind ;
+      Dim_Light : Action Light ;
+      Switchable_Light : Action Light;
+}
+
+Concrete syntax:
+concrete SmartHouseEng of SmartHouse = open SyntaxEng, ParadigmsEng, Prelude in {
+    lincat
+      Command, Device, Kind, Action = {s : Str} ;
+    
+    lin
+      Act _ act dev = {s = act.s ++ dev.s} ;
+      The kind = {s = "the" ++ kind.s} ;
+      Dim_Light = {s = "dim"} ;
+      Switchable_Light = {s = ("switch-on" | "switch-off") };
+      -- argument for Kind does not appear in the linearization;
+      -- type checker can reconstruct the kind from the dev argument (technique of suppression)
+      Light = {s = "light"} ;
+      Fan = {s = "fan"} ;
+}
+```
+> Learnt: Able to use omission of arguments for types when the dependent types are specified; can use blank string in record syntax when writing linearizations of ie, Actions.
+
+# Exercise 6-3.*
+Define some rules involving agreement in abstract syntax by using dependent types --- for instance, the number agreement in NP-VP predication in English.  
+To this end, you need to introduce Number as a type in the abstract syntax and make NP and VP dependent
+on it.  
 
 
-Exercise 6-1.Write an abstract syntax module with the contents above
-and an appropriate English concrete syntax. Try out parsing and generation.
-Exercise 6-2. Add some device kinds and actions to the grammar.
-Exercise 6-3.* Dene some rules involving agreement in abstract syntax
-by using dependent types|for instance, the number agreement
-in NP-VP predication in English. To this end, you need to introduce
-Number as a type in the abstract syntax and make NP and VP dependent
-on it.
 Exercise 6-4.*+ In the GF resource grammar library, there are several
 categories of verbs|V, V2, V3, VS, etc|and corresponding complementation
 rules for building verb phrases; see Section 5.15 and Appendix
