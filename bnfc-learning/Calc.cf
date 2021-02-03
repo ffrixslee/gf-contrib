@@ -1,0 +1,13 @@
+EAdd. Exp ::= Exp "+" Exp1 ;
+ESub. Exp ::= Exp "-" Exp1 ;
+EMul. Exp1 ::= Exp1 "*" Exp2 ;
+EDiv. Exp1 ::= Exp1 "/" Exp2 ;
+EInt. Exp2 ::= Integer ;
+NOne. Number ::= "1" ;
+
+coercions Exp 2 ;
+
+-- To make the parser accept semicolons:
+-- Stm ::= ";" ;
+-- _ . Stm :: Stm ";" ; 
+-- can use wildcard as it makes no semantic difference
