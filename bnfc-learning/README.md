@@ -12,7 +12,8 @@
 - http://www.cse.chalmers.se/edu/year/2012/course/DAT150/lectures/plt-book.pdf
 
 ### Chapter:2
-- [ ] Need to check Calculator.hs ; why is there a parse error ?
+- [ ] Need to check Calculator.hs ; why is there a parse error ? 
+- [ ] Why can't have both haskell and java bnfc folders ? (leads to parse errors) 
 - Ident stands for identifiers: a letter (A..Za..z followed by letters, digits, and characters ’, e.g. r2_out’
 - Stopped at pg 46
 

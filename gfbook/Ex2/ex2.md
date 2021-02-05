@@ -221,43 +221,85 @@ Italian:
 # Exercise 2-8
 Add the with construction to the Food grammar, in both
 the ambiguous and the unambiguous versions.
-English: 
+Ambiguous (English): 
 ```hs 
+Abstract syntax:
         With kind1 kind2 = {s = kind1.s ++ "with" ++ kind2.s } ;
+
+Concrete syntax:
+        With kind1 kind2 = {s = kind1.s ++ "with" ++ kind2.s } ;
+
 ```
 
-Italian:
+Ambiguous (Italian):
 ```hs
+Abstract syntax:
+        With kind1 kind2 = {s = kind1.s ++ "with" ++ kind2.s } ;
+
+Concrete syntax:
     With kind1 kind2 = {s = kind1.s ++ "con" ++ kind2.s } ;
 ```
 
+Unambiguous(English):
+```hs
+Abstract syntax:
+    fun With : Kind -> ComplexKind -> ComplexKind ; 
+
+Concrete syntax:
+    With a b = {s = a.s ++ "with" ++ b.s } ;
+```
+
 # Exercise 2-9
-How many trees are there for an expression of form
-Kind with . . . with Kind for 2, 3, and 4 with's? This series of numbers is
-known as the Catalan numbers, and it is a common pattern of counting
-in combinatorics; see en.wikipedia.org/wiki/Catalan number
-for other examples.
+How many trees are there for an expression of form Kind with . . . with Kind for 2, 3, and 4 with's? This series of numbers is known as the Catalan numbers, and it is a common pattern of counting in combinatorics; see en.wikipedia.org/wiki/Catalan number for other examples.
 
 # Exercise 2-10
-(This is a variation of the exercise in Section 2.5, now
-permitting translation between languages.) Write a concrete syntax of
-Food for your favourite language. Use random generation to see how
-correct it becomes. Don't care about ungrammatical sentences due to
+(This is a variation of the exercise in Section 2.5, now permitting translation between languages.) Write a concrete syntax of Food for your favourite language. Use random generation to see how correct it becomes. Don't care about ungrammatical sentences due to
 gender and related things yet.
 
+```hs
+Food> gr -number=5 | l -treebank
+Food: Pardon (This (With Cheese Chocolate)) Warm
+FoodEng: excuse me , is this cheese with chocolate warm ?
+FoodIta: scusatemi , questo formaggio con cioccolato caldo ?
+Food: isNot (That Chocolate) Warm
+FoodEng: that chocolate isn't warm
+FoodIta: quel cioccolato non è caldo
+Food: Is (This Water) Expensive
+FoodEng: this water is expensive
+FoodIta: questo acqua minerale è caro
+Food: Pardon (This Chocolate) Warm
+FoodEng: excuse me , is this chocolate warm ?
+FoodIta: scusatemi , questo cioccolato caldo ?
+Food: Pardon (That (With Cheese (With Fish Chocolate))) Clean
+FoodEng: excuse me , is that cheese with fish with chocolate clean ?
+FoodIta: scusatemi , quel formaggio con pesce con cioccolato pulita ?
+```
+
 # Exercise 2-11
-Create a word alignment graph for a string of length
-10 by using the reversing grammar of the exercise in Section 2.9.
+Create a word alignment graph for a string of length 10 by using the reversing grammar of the exercise in Section 2.9.
+```hs
+Reverse> p "this Italian wine is very expensive" | aw
+digraph {
+  rankdir=LR ;
+  node [shape = record] ;
+   
+  struct0[label = "<n0> this | <n1> Italian | <n2> wine | <n3> is | <n4> very | <n5> expensive"] ;
+  struct0:n0:e -> struct1:n5:w ;
+  struct0:n1:e -> struct1:n4:w ;
+  struct0:n2:e -> struct1:n3:w ;
+  struct0:n3:e -> struct1:n2:w ;
+  struct0:n4:e -> struct1:n1:w ;
+  struct0:n5:e -> struct1:n0:w ;
+  struct1[label = "<n0> expensive | <n1> very | <n2> is | <n3> wine | <n4> Italian | <n5> this"] ;
+}
+```
 
 # Exercise 2-12
-See what happens with word alignment if a word in
-one language is translated by a phrase of several words in another one.
-Write rst a grammar that displays this behaviour.
+See what happens with word alignment if a word in one language is translated by a phrase of several words in another one.  
+Write first a grammar that displays this behaviour.
 
 # Exercise 2-13
-Make the reversing grammar of the exercise in Section
-2.9 work with unspaced strings of letters a to z, for instance, to
-convert the input "abcdefghi" to "ihgfedcba".
+Make the reversing grammar of the exercise in Section 2.9 work with unspaced strings of letters a to z, for instance, to convert the input "abcdefghi" to "ihgfedcba".
 
 # Exercise 2-14
 ```hs

@@ -19,6 +19,7 @@ abstract mp3 = {
       Action : Objects -> Modifiers -> Verbs -> Command ;
       This : Objects -> Item ;
       TheNext, ThePrevious : Modifiers ;
+      TheNext, ThePrevious : Object -
       Song, Artist : Objects ;
       Pause, Play, Remove, Stop : Verbs ;
 

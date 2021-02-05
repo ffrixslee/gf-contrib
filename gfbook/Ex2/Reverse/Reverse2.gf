@@ -1,4 +1,4 @@
-concrete Reverse2 of Reverse = Reverse ** {
+concrete Reverse2 of Reverse = {
   
       lincat
         Phrase, Item, Kind, Quality = {s : Str} ;

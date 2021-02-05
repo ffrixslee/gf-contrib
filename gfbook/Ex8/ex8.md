@@ -1,7 +1,36 @@
-Exercise 8-0. Define non-associative and right-associative inx operations
-analogous to infixl.
-Exercise 8-1. Add a constructor that puts parentheses around expressions to raise their precedence, but is eliminated by a def denition (see
-Section 6.10 ). Test parsing with and without a pipe to pt -compute.
+# Exercise 8-0
+Define non-associative and right-associative inx operations analogous to infixl.  
+
+```hs
+Abstract syntax:
+abstract Calculator = {
+    flags startcat = Exp ;
+    cat
+      Exp ;
+    fun
+      EPlus, EMinus, ETimes, EDiv, ECons, EAssign : Exp -> Exp -> Exp ;
+      EInt : Int -> Exp ;
+}
+
+Concrete syntax: 
+concrete CalculatorC of Calculator = open Formal, Prelude in {
+    lincat
+      Exp = TermPrec ;
+    lin
+      EPlus = infixl 0 "+" ;
+      EMinus = infixl 0 "-" ;
+      ETimes = infixl 1 "*" ;
+      EDiv = infixl 1 "/" ;
+      ECons = infixn 0 ":-" ;
+      EAssign = infixr 0 "=" ;
+      EInt i = constant i.s ;
+}
+```
+
+# Exercise 8-1
+Add a constructor that puts parentheses around expressions to raise their precedence, but is eliminated by a def definition (see Section 6.10 ). Test parsing with and without a pipe to pt -compute.
+
+
 Exercise 8-2.* Implement a calculator that returns numeric results
 as an embedded grammar application. You can even extend this to a
 natural-language calculator that uses number words, which are implemented
