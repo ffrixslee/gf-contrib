@@ -193,7 +193,7 @@ incomplete concrete FoodsI of Foods =
     }
 ```
 
-> Lexicon-domain consists of Interface (General; LexFoods) and Instance (Language-specific; LexFoodsEng, LexFoodsFre)
+> Lexicon-domain consists of Interface (ie, General; LexFoods) and Instance (ie, Language-specific; LexFoodsEng, LexFoodsFre)
 **LexFoods.gf**
 ```hs
 interface LexFoods = open Syntax in {
@@ -312,6 +312,8 @@ these Italian pies are fresh
 # Exercise 5-6
 Add the ILike construct to the Foods grammar and
 implement it for your favourite languages. Also invent some other constructs where compile-time transfer is necessary.
+> Compile-time: involves functions which don't take any arguments
+> Run-time: involves functions which take arguments
 
 **Foods.gf**
 ```hs

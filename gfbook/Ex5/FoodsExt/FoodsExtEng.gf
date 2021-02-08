@@ -1,46 +1,34 @@
 --# -path=.:alltenses
 
-concrete FoodsExtEng of FoodsExt = {
+concrete FoodsExtEng of FoodsExt = open SyntaxEng, ParadigmsEng in {
     lincat
-      Comment, Quality = {s : Str} ;
-      Kind = {s : Number => Str} ;
-      Item = {s : Str ; n : Number} ;
+      Comment = Utt ;
+      Drink = NP ;
+      Freshness = AP ; 
     lin
-      ILike it = {s = "I like" ++ it.s } ;
-      Pred item quality = 
-          {s = item.s ++ copula ! item.n ++ quality.s} ;
-      Pred' item = {s = copula ! item.n ++ item.s ++ ("good" | "bad")} ;
-      Know item quality = {s = "I know that" ++ item.s ++ copula ! item.n ++ "bad" } ;
-      -- Pending : Can kind = {s = "Can you give me" ++ kind.s} ;
-      This = det Sg "this" ;
-      That = det Sg "that" ;
-      These = det Pl "these" ;
-      Those = det Pl "those" ;
-      Mod quality kind =
-          {s = \\n => quality.s ++ kind.s ! n} ;
-      Wine = regNoun "wine" ;
-      Cheese = regNoun "cheese" ;
-      Fish = noun "fish" "fish" ;
-      Pizza = regNoun "pizza" ;
-      Very a = {s = "very" ++ a.s} ;
-      Fresh = adj "fresh" ; 
-      Warm = adj "warm" ;
-      Italian = adj "Italian" ; 
-      Expensive = adj "expensive" ;
-      Delicious = adj "delicious" ;
-      Boring = adj "boring" ;
-    param 
-      Number = Sg | Pl ;
-    oper
-      det : Number -> Str ->
-        {s : Number => Str} -> {s : Str ; n : Number} =
-          \n,det,noun -> {s = det ++ noun.s ! n; n = n} ;
-      noun : Str -> Str -> {s : Number => Str} =
-        \man,men -> {s = table {Sg => man ; Pl => men}} ;
-      regNoun : Str -> {s : Number => Str} = 
-          \car -> noun car (car + "s") ;
-      adj : Str -> {s : Str} = 
-          \cold -> {s = cold} ;
-      copula : Number => Str = 
-          table {Sg => "is" ; Pl => "are"} ;
+      -- is this wine good:
+      Pred drink_NP freshness_AP =  mkUtt (mkQCl (mkCl drink_NP freshness_AP)) ; -- output: is wine/juice good ; Question : how to get "this wine"
+      -- I (don't) like this wine, do you like this wine:
+      Dontlike drink_NP = mkUtt ( mkS negativePol ( mkCl i_NP like_V2 drink_NP )) ; --Question: how to make a list (ie She did, I would) 
+      -- I want wine, I would like to have wine:
+      Want drink_NP = mkUtt (mkCl i_NP want_V2 drink_NP) ;
+      -- I know that this wine is bad:
+      --Know drink_NP freshness_AP = mkUtt (mkCl i_NP  (mkS (mkCl drink_NP freshness_AP)) ;  
+
+      -- can you give me wine: 
+      --Can drink_NP = mkUtt (mkCl you_NP give_V2 drink_NP) ;
+      Good = mkAP good_A ;
+      Bad = mkAP bad_A ;
+      Juice = mkNP juice_N ; 
+      Wine = mkNP wine_N ;
+      oper
+        juice_N = mkN "juice" ;
+        wine_N = mkN "wine" ;
+        good_A = mkA "good" ;
+        bad_A = mkA "bad" ;
+        like_V2 = mkV2 "like" ;
+        want_V2 = mkV2 "want" ;
+        know_V2 = mkV2 "know" ;
+        give_V2 = mkV2 "give" ;
+
 }
