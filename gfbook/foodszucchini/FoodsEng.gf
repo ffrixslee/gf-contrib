@@ -1,17 +1,19 @@
-concrete FoodsEng of Foods = {
+concrete FoodsEng of Foods = open Prelude in {
 
   lincat
     Kind = LinKind ;
     Item = LinItem ;
   lin
     -- : Item -> Quality -> Comment ;
-    Is item quality = {s = item.s ++ copula ! item.n ++ quality.s} ;
+    -- Is item quality = {s = item.s ++ copula ! item.n ++ quality.s} ;
+       Is dish quality = {s = dish.s ++ "is" ++ quality.s} ;
 
     -- : Item -> Item -> Comment ;
-    Has food ingrds = {s = food.s ++ have ! food.n ++ ingrds.s} ;
+    -- Has food ingrds = {s = food.s ++ have ! food.n ++ ingrds.s} ;
+       Has dish ingrds = {s = dish.s ++ "has" ++ ingrds.s} ;
 
     -- : Kind -> Item ;
-    Your kind = {s = "your" ++ kind.s ! Sg ; n = Sg} ;
+    Your dish = {s = "your" ++ dish.s} ;
     Mass kind = {s = kind.s ! Sg ; n = Sg} ;
     Plural kind = {s = kind.s ! Pl ; n = Pl} ;
 
@@ -19,24 +21,25 @@ concrete FoodsEng of Foods = {
     ConjItem item1 item2 = {s = item1.s ++ "and" ++ item2.s ; n = Pl} ;
 
     -- : Quality -> Kind -> Kind ;
-    Mod quality kind = {s = \\n => quality.s ++ kind.s ! n} ;
+    Mod quality ingredient = {s = quality.s ++ ingredient.s} ;
 
     -- : Kind
-    Pizza = mkKind "pizza" ;
-    Lasagna = mkKind "lasagna" ;
-    Risotto = mkKind "risotto" ;
-    PineSeed = mkKind "pine seed" ;
-    Mush = mkKind "mush" ;
-    Zucchini = mkKind "zucchini" ;
+    Pizza = ss "pizza" ;
+    Lasagna = ss "lasagna" ;
+    Risotto = ss "risotto" ;
+    PineSeed = ss "pine seed" ;
+    Mush = ss "mush" ;
+    Zucchini = ss "zucchini" ;
 
     -- : Quality
-    Colorless = mkQuality "colorless" ;
-    Green = mkQuality "green" ;
-    Indeterminate = mkQuality "indeterminate" ;
-    Vegan = mkQuality "vegan" ;
+    Colorless = ss "colorless" ;
+    Green = ss "green" ;
+    Indeterminate = ss "indeterminate" ;
+    Vegan = ss "vegan" ;
 
   param
     Number = Sg | Pl ;
+    --Item = Dish | Ingredient ;
   oper
     LinItem : Type = {s : Str ; n : Number} ;
     LinKind : Type = {s : Number => Str} ;
