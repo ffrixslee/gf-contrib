@@ -20,6 +20,7 @@ Chapter 5:
 
 Chapter 6:
 - [x] Ex 6-1: They said preferably using the RGL but how? Solution: open SyntaxXxx and ParadigmsXxx in concrete syntax.
+- [ ] Ex 6-1: Problems ; having trouble generating and typechecking "the successor of" and "zero" using RGL
 - Learned that you can use wildcard('_') or omit arguments for non-dependent types
 
 Chapter 7: 
