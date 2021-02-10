@@ -12,6 +12,12 @@ import Calc.Skel  ()
 import Calc.Print ( Print, printTree )
 import Calc.Abs   ()
 
+import LexCalc
+import ParCalc
+import AbsCalc
+import Interpreter
+import ErrM
+
 type Err = Either String
 type ParseFun a = [Token] -> Err a
 
@@ -61,10 +67,8 @@ usage = do
 
 main :: IO ()
 main = do
-  args <- getArgs
-  case args of
-    ["--help"] -> usage
-    [] -> getContents >>= run 2 pExp
-    "-s":fs -> mapM_ (runFile 0 pExp) fs
-    fs -> mapM_ (runFile 2 pExp) fs
-
+  interact calc
+  putStrLn ""
+calc s =
+  let Ok e = pExp (myLexer s)
+  in show (interpret e)

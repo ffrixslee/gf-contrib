@@ -15,6 +15,3 @@ data Exp
     | EInt Integer
   deriving (C.Eq, C.Ord, C.Show, C.Read)
 
-data Number = NOne
-  deriving (C.Eq, C.Ord, C.Show, C.Read)
-

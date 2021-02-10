@@ -26,7 +26,7 @@ There are no reserved words in Calc.
 
 The symbols used in Calc are the following:
   | + | - | * | /
-  | 1 | ( | ) |
+  | ( | ) |  |
 
 ===Comments===
 There are no single-line comments in the grammar.There are no multiple-line comments in the grammar.
@@ -45,6 +45,5 @@ All other symbols are terminals.
   |  |  **|**  | //Exp2//
   | //Exp2// | -> | //Integer//
   |  |  **|**  | ``(`` //Exp// ``)``
-  | //Number// | -> | ``1``
 
 

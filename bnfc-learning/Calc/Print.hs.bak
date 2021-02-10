@@ -105,7 +105,3 @@ instance Print Calc.Abs.Exp where
     Calc.Abs.EDiv exp1 exp2 -> prPrec i 1 (concatD [prt 1 exp1, doc (showString "/"), prt 2 exp2])
     Calc.Abs.EInt n -> prPrec i 2 (concatD [prt 0 n])
 
-instance Print Calc.Abs.Number where
-  prt i e = case e of
-    Calc.Abs.NOne -> prPrec i 0 (concatD [doc (showString "1")])
-
