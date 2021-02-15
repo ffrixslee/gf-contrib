@@ -11,6 +11,10 @@
 - http://www.cse.chalmers.se/edu/course/DAT151/laborations/lab2/CMM.cf
 - http://www.cse.chalmers.se/edu/year/2012/course/DAT150/lectures/plt-book.pdf
 
+# BNFC readthedocs
+- [ ] How to know the precedence rules of BNFC ? (I don't understand how it works)
+- What are pragmas and their functions ?
+
 ### Chapter:2
 - [ ] Need to check Calculator.hs ; why is there a parse error ? 
 - [ ] Why can't have both haskell and java bnfc folders ? (leads to parse errors) 
