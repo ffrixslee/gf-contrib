@@ -57,5 +57,6 @@ Tdouble. Type ::= "double" ;
 Tint. Type ::= "int" ;
 Tvoid. Type ::= "void" ;
 
-position token Id (letter (letter | digit | ’_’)*) ;
+token Id (letter (letter | digit | '_')*) ;
+separator Id "," ;
 

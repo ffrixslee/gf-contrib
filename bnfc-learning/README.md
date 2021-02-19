@@ -23,7 +23,10 @@
 
 ### Chapter: 2
 - section 2-7 : stuck as it can't GHC make due to missing modules (some weird issue with the renamed modules)
-- section 2-10 : problem with last line involving tokens(issue: syntax error on line 60)
+- section 2-10 : problem with last line involving tokens(issue: syntax error on line 60)  
+> nurliyana@NLIYANAAMF2V2M bnfc-learning % bnfc -m -d Prog.cf
+syntax error at line 60, column 36 due to lexer error  
+> Solution: add `separator Id "," ;`
 
 
 ### Chapter: 3

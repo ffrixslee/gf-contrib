@@ -6,12 +6,12 @@
 
 # Default goal.
 
-all : Calc/Test
+all : Prog/Test
 
 # Rules for building the parser.
 
-Calc/ErrM.hs Calc/Lex.x Calc/Print.hs Calc/Par.y Calc/Test.hs : Calc.cf
-	bnfc --haskell -d Calc.cf
+Prog/ErrM.hs Prog/Lex.x Prog/Print.hs Prog/Par.y Prog/Test.hs : Prog.cf
+	bnfc --haskell -d Prog.cf
 
 %.hs : %.y
 	happy --ghc --coerce --array --info $<
@@ -19,16 +19,16 @@ Calc/ErrM.hs Calc/Lex.x Calc/Print.hs Calc/Par.y Calc/Test.hs : Calc.cf
 %.hs : %.x
 	alex --ghc $<
 
-Calc/Test : Calc/Test.hs Calc/ErrM.hs Calc/Lex.hs Calc/Par.hs Calc/Print.hs
+Prog/Test : Prog/Test.hs Prog/ErrM.hs Prog/Lex.hs Prog/Par.hs Prog/Print.hs
 	ghc --make $< -o $@
 
 # Rules for cleaning generated files.
 
 clean :
-	-rm -f Calc/*.hi Calc/*.o Calc/*.log Calc/*.aux Calc/*.dvi
+	-rm -f Prog/*.hi Prog/*.o Prog/*.log Prog/*.aux Prog/*.dvi
 
 distclean : clean
-	-rm -f Calc/Abs.hs Calc/Abs.hs.bak Calc/ComposOp.hs Calc/ComposOp.hs.bak Calc/Doc.txt Calc/Doc.txt.bak Calc/ErrM.hs Calc/ErrM.hs.bak Calc/Layout.hs Calc/Layout.hs.bak Calc/Lex.x Calc/Lex.x.bak Calc/Par.y Calc/Par.y.bak Calc/Print.hs Calc/Print.hs.bak Calc/SharedString.hs Calc/SharedString.hs.bak Calc/Skel.hs Calc/Skel.hs.bak Calc/Test.hs Calc/Test.hs.bak Calc/XML.hs Calc/XML.hs.bak Calc/AST.agda Calc/AST.agda.bak Calc/Parser.agda Calc/Parser.agda.bak Calc/IOLib.agda Calc/IOLib.agda.bak Calc/Main.agda Calc/Main.agda.bak Calc/Calc.dtd Calc/Calc.dtd.bak Calc/Test Calc/Lex.hs Calc/Par.hs Calc/Par.info Calc/ParData.hs Makefile
-	-rmdir -p Calc/
+	-rm -f Prog/Abs.hs Prog/Abs.hs.bak Prog/ComposOp.hs Prog/ComposOp.hs.bak Prog/Doc.txt Prog/Doc.txt.bak Prog/ErrM.hs Prog/ErrM.hs.bak Prog/Layout.hs Prog/Layout.hs.bak Prog/Lex.x Prog/Lex.x.bak Prog/Par.y Prog/Par.y.bak Prog/Print.hs Prog/Print.hs.bak Prog/SharedString.hs Prog/SharedString.hs.bak Prog/Skel.hs Prog/Skel.hs.bak Prog/Test.hs Prog/Test.hs.bak Prog/XML.hs Prog/XML.hs.bak Prog/AST.agda Prog/AST.agda.bak Prog/Parser.agda Prog/Parser.agda.bak Prog/IOLib.agda Prog/IOLib.agda.bak Prog/Main.agda Prog/Main.agda.bak Prog/Prog.dtd Prog/Prog.dtd.bak Prog/Test Prog/Lex.hs Prog/Par.hs Prog/Par.info Prog/ParData.hs Makefile
+	-rmdir -p Prog/
 
 # EOF
