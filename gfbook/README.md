@@ -12,15 +12,17 @@ Chapter 5:
 
 - [x] Check that my solution for ex 5-5 is correct.  
 - [ ] What are some other constructs where compile-time transfer is necessary ?  
-- What is meant by flattening of constructions ? Is it something like point-free function composition in Haskell ?
+- [ ] What is meant by flattening of constructions ? Is it something like point-free function composition in Haskell ?
 - [x] section 5-18: how to handle contracted (ie, don't) statements ? Solution: refer to RGL and GF Synopsis (API).
 - [ ] Need to brush up on extending grammars 
 - [x] Learn how to linearize Kind (linKind) using RGL
 - [x] How to define a new Determiner in the the lincat (ie the next, the previous). Solution: use RGL and refer to GF Synopsis
 
 Chapter 6:
-- [x] Ex 6-1: They said preferably using the RGL but how? Solution: open SyntaxXxx and ParadigmsXxx in concrete syntax.
-- [ ] Ex 6-1: Problems ; having trouble generating and typechecking "the successor of" and "zero" using RGL
+- [x] Ex 6-1: They said preferably using the RGL but how? 
+> Solution: open SyntaxXxx and ParadigmsXxx in concrete syntax.
+- [x] Ex 6-1: Problems ; having trouble generating and typechecking "the successor of" and "zero" using RGL. 
+> Solution: resolved using type of Prop=S (it seems S is more flexible), arguments on the RHS must be checked (whether x or x_N), mkN2 actually includes prepositions(ie, of, from)[Check the gf rgl synopsis], I also used the Combinators module but it seems that wasn't necessary.
 - Learned that you can use wildcard('_') or omit arguments for non-dependent types
 
 Chapter 7: 

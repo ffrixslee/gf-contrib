@@ -13,24 +13,33 @@ abstract Arithm = {
       Zero : Nat ; -- 0
       Succ : Nat -> Nat ; -- the successor of x
       Even : Nat -> Prop ; -- x is even
-      And : Prop -> Prop -> Prop ; -- A and B
-      X, Y : Nat ;
+      And : Prop -> Prop -> Prop ; -- x and y
+      A_NP,  B_NP : Nat ;
 }
 
 Concrete syntax:
 
-concrete ArithmEng of Arithm = open SyntaxEng, ParadigmsEng in {
+concrete ArithmEng of Arithm = open SyntaxEng, ParadigmsEng, Combinators in {
 
     lincat
-      Prop, Nat = Str ;
+      Prop = S ;
+      Nat = NP ;
     
     lin 
-      Zero =  "zero" ;
-      Succ x = "the successor of" ++ x ;
-      Even x = x ++ "is even" ;
-      And x y = x ++ "and" ++ y ;
-      X = "x" ;
-      Y = "y" ;
+      Zero = mkNP zero_N ; -- (pending)
+      Succ x = mkNP (mkCN successor_N2 (mkNP x_N)) ; --(pending)  -- N2 -> NP -> NP
+      Even x = mkS (mkCl x even_A) ;     -- A -> NP -> Cl
+      And x y = mkS and_Conj x y;
+      A_NP = mkNP A_N ;
+      B_NP = mkNP B_N ;
+
+    oper 
+      x_N         = mkN "x" ;
+      zero_N      = mkN "0" ;
+      successor_N2 = mkN2 (mkN "successor") ;
+      even_A      = mkA "even" ;
+      A_N = mkN "A" ;
+      B_N = mkN "B" ;
 }
 ```
 
@@ -115,7 +124,7 @@ To this end, you need to introduce Number as a type in the abstract syntax and m
 on it.  
 
 
-Exercise 6-4.*+ In the GF resource grammar library, there are several
+# Exercise 6-4.*+ In the GF resource grammar library, there are several
 categories of verbs|V, V2, V3, VS, etc|and corresponding complementation
 rules for building verb phrases; see Section 5.15 and Appendix
 D. An alternative analysis, perhaps more elegant, would be to have just
@@ -129,7 +138,7 @@ listed above.
 
 
 
-Exercise 6-5. The grammar Shopping in Section 4.8 permits the formation
+# Exercise 6-5. The grammar Shopping in Section 4.8 permits the formation
 of phrases such as this shirt is delicious and that sh is comfortable.
 A way to prevent would be to distinguish between clothing
 and food items. To avoid duplicated code for these items, the best way
@@ -139,7 +148,7 @@ Rewrite the abstract syntax in Figure 27 in accordance with
 these ideas.
 
 
-Exercise 6-6. Write an abstract and concrete syntax with the concepts
+# Exercise 6-6. Write an abstract and concrete syntax with the concepts
 of this section, and experiment with it in GF.
 Exercise 6-7.* Dene the notions of \even" and \odd" by using proof
 objects. Hint. You need one function for proving that 0 is even, and
@@ -147,11 +156,13 @@ two other functions for propagating the properties from each number
 to its successor.
 
 
-Exercise 6-8.* Write a new version of the Smart grammar with classes,
+# Exercise 6-8.* Write a new version of the Smart grammar with classes,
 and test it in GF.
-Exercise 6-9.* Add some actions, kinds, and classes to the grammar.
+
+# Exercise 6-9.* Add some actions, kinds, and classes to the grammar.
 Try to port the grammar to a new language.
-Exercise 6-10.* A better structure can be given for the code by treating
+
+# Exercise 6-10.* A better structure can be given for the code by treating
 classes as zero-place funs of category Class, and making all proof
 objects have the category saying that a kind is an instance of a class:
 cat Instance Class Kind ;
@@ -159,17 +170,17 @@ Actions can then be made dependent on just classes, and devices on
 kinds. Work out the details of this alternative, in particular, the Act
 function that forms commands.
 
-Exercise 6-11.*+ Write an abstract syntax of the whole predicate
+# Exercise 6-11.*+ Write an abstract syntax of the whole predicate
 calculus, with the connectives \and", \or", \implies", and \not",
 and the quantiers \exists" and \for all". Use higher-order functions
 to guarantee that unbounded variables do not occur.
-Exercise 6-12. *+ Write a concrete syntax for your favourite notation
+# Exercise 6-12. *+ Write a concrete syntax for your favourite notation
 of predicate calculus. You can use LaTeX as target language if you want
 nice output. You can also try producing boolean expressions of some
 programming language. Use as many parenthesis as you need to guarantee
 non-ambiguity. You can also minimize the number of parentheses
 by using a precedence level parameter, as described in Section 8.1.
-Exercise 6-13. *+ Write an English concrete syntax for predicate
+# Exercise 6-13. *+ Write an English concrete syntax for predicate
 calculus, to translate between formulas and natural language. Even
 better, use a functor over the resource grammar Syntax interface to
 write a generic natural-language grammar for predicate calculus. You
@@ -177,27 +188,27 @@ can thereby use the Symbolic library to enable the use of variables and other ma
 D.4.3.
 
 
-Exercise 6-14. *+ Implement an interpreter of a small functional programming
+# Exercise 6-14. *+ Implement an interpreter of a small functional programming
 language with natural numbers, lists, pairs, lambdas abstracts,
 etc. Use higher-order abstract syntax with semantic denitions.
 As concrete syntax, use the notation of your favourite functional programming
 language.
 
 
-Exercise 6-15.* Write a concrete syntax of Aggregation and test the
+# Exercise 6-15.* Write a concrete syntax of Aggregation and test the
 grammar in the GF shell. Notice that we have used or as the only
 conjunction to simplify number agreement for noun phrases; however,
 there is no extra problem to use and if linearization is dened by using
 the resource grammar.
-Exercise 6-16.* English phrases of the form A and B or C are ambiguous.
+# Exercise 6-16.* English phrases of the form A and B or C are ambiguous.
 Generalize the Aggregation grammar by using the conjunction
 word, either and and or, as an extra argument of conjunctions, and
 generalize aggregation accordingly. Give an example where aggregation
 actually resolves an ambiguity.
-Exercise 6-17.* Generalize the aggr function to arbitrary iterations,
+# Exercise 6-17.* Generalize the aggr function to arbitrary iterations,
 so that e.g. John walks or John runs or John walks becomes John walks
 or runs or walks.
-Exercise 6-18.* Languages sometimes put particular restrictions to the
+# Exercise 6-18.* Languages sometimes put particular restrictions to the
 co-occurrences of words. For example, in the Food grammar ( Figure 12
 in Section 2.6 ), the word very in very delicious might be super
 uous
@@ -205,7 +216,7 @@ and clumsy in some languages. But it can be removed by a suitable
 transfer function, without changing the grammar. Dene this function, operating on the top level Comments, and test it in the translation from
 English to Italian under the assumption that Italian doesn't permit
 molto in combination with delizioso.
-Exercise 6-19.*+ The GF web page contains a multilingual grammar
+# Exercise 6-19.*+ The GF web page contains a multilingual grammar
 of the numeral systems of 88 languages (GF/examples/numerals). This
 is possible because the numeral systems in all those languages are decimal
 (base 10), at least for numbers above a certain size. If we want
@@ -220,6 +231,6 @@ this in GF, by means of two separate categories Nat and Bin, and
 the transfer functions bin2nat and nat2bin. Test your conversions by
 random-generating numbers and converting them back and forth.
 
-Exercise 6-20. Generate 100 random trees in the Food grammar and
+# Exercise 6-20. Generate 100 random trees in the Food grammar and
 count the frequencies of This and That, to verify that the generator
 obeys the probabilities.
