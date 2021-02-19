@@ -16,8 +16,8 @@
 - What are pragmas and their functions ?
 
 ### Chapter:2
-- [ ] Need to check Calculator.hs ; why is there a parse error ? 
-- [ ] Why can't have both haskell and java bnfc folders ? (leads to parse errors) 
+- [] Need to check Calculator.hs ; why is there a parse error ? 
+- [x] Why can't have both haskell and java bnfc folders ? (leads to parse errors) 
 - Ident stands for identifiers: a letter (A..Za..z followed by letters, digits, and characters ’, e.g. r2_out’
 - Stopped at pg 46
 
