@@ -5,8 +5,8 @@ concrete ArithmEng of Arithm = open SyntaxEng, ParadigmsEng, Combinators in {
       Nat = NP ;
     
     lin 
-      Zero = mkNP zero_N ; -- (pending)
-      Succ x = mkNP (mkCN successor_N2 (mkNP x_N)) ; --(pending)  -- N2 -> NP -> NP
+      Zero = mkNP zero_N ;
+      Succ x = mkNP (mkCN  successor_N2 (mkNP x_N)) ; -- N2 -> NP -> NP
       Even x = mkS (mkCl x even_A) ;     -- A -> NP -> Cl
       And x y = mkS and_Conj x y;
       A_NP = mkNP A_N ;

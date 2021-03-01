@@ -24,6 +24,8 @@ Chapter 6:
 - [x] Ex 6-1: Problems ; having trouble generating and typechecking "the successor of" and "zero" using RGL. 
 > Solution: resolved using type of Prop=S (it seems S is more flexible), arguments on the RHS must be checked (whether x or x_N), mkN2 actually includes prepositions(ie, of, from)[Check the gf rgl synopsis], I also used the Combinators module but it seems that wasn't necessary.
 - Learned that you can use wildcard('_') or omit arguments for non-dependent types
+- Dependent type is a type that takes arguments from other types
+- Still don't understand how chapter 6 works eg, how to write dependent types
 
 Chapter 7: 
 - [x] Learn how to convert other grammars to .pgf (Tutorial 7 and Chapter 7 is a bit different from blog)

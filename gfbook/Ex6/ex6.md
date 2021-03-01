@@ -18,7 +18,6 @@ abstract Arithm = {
 }
 
 Concrete syntax:
-
 concrete ArithmEng of Arithm = open SyntaxEng, ParadigmsEng, Combinators in {
 
     lincat
@@ -26,8 +25,8 @@ concrete ArithmEng of Arithm = open SyntaxEng, ParadigmsEng, Combinators in {
       Nat = NP ;
     
     lin 
-      Zero = mkNP zero_N ; -- (pending)
-      Succ x = mkNP (mkCN successor_N2 (mkNP x_N)) ; --(pending)  -- N2 -> NP -> NP
+      Zero = mkNP zero_N ;
+      Succ x = mkNP (mkCN  successor_N2 (mkNP x_N)) ;  -- N2 -> NP -> NP
       Even x = mkS (mkCl x even_A) ;     -- A -> NP -> Cl
       And x y = mkS and_Conj x y;
       A_NP = mkNP A_N ;
@@ -118,43 +117,35 @@ concrete SmartHouseEng of SmartHouse = open SyntaxEng, ParadigmsEng, Prelude in 
 ```
 > Learnt: Able to use omission of arguments for types when the dependent types are specified; can use blank string in record syntax when writing linearizations of ie, Actions.
 
-# Exercise 6-3.*
+# Exercise 6-3.* (pending)
 Define some rules involving agreement in abstract syntax by using dependent types --- for instance, the number agreement in NP-VP predication in English.  
 To this end, you need to introduce Number as a type in the abstract syntax and make NP and VP dependent
 on it.  
 
 
-# Exercise 6-4.*+ In the GF resource grammar library, there are several
-categories of verbs|V, V2, V3, VS, etc|and corresponding complementation
-rules for building verb phrases; see Section 5.15 and Appendix
-D. An alternative analysis, perhaps more elegant, would be to have just
-one category of verbs, but make it dependent on another category, say
-VSub, which is the type of verb subcategorizations. We would also need
-a type of actual complement lists, say Comps, dependent on VSub. With
-this machinery, just one complementation rule is needed, of type
-(vs : VSub) -> V vs -> Comps vs -> VP
-Work out the details of this idea, covering at least the four verb categories
-listed above.
+# Exercise 6-4.*+ (pending)
+In the GF resource grammar library, there are several
+categories of verbs|V, V2, V3, VS, etc|and corresponding complementation rules for building verb phrases; see Section 5.15 and Appendix D.  
+An alternative analysis, perhaps more elegant, would be to have just one category of verbs, but make it dependent on another category, sayVSub, which is the type of verb subcategorizations.  
+We would also need a type of actual complement lists, say Comps, dependent on VSub. With this machinery, just one complementation rule is needed, of type (vs : VSub) -> V vs -> Comps vs -> VP  
+Work out the details of this idea, covering at least the four verb categories listed above.  
 
-
-
-# Exercise 6-5. The grammar Shopping in Section 4.8 permits the formation
-of phrases such as this shirt is delicious and that sh is comfortable.
+# Exercise 6-5.
+The grammar Shopping in Section 4.8 permits the formation
+of phrases such as this shirt is delicious and that sh is comfortable.  
 A way to prevent would be to distinguish between clothing
-and food items. To avoid duplicated code for these items, the best way
-to go is by making the categories of Item and Quality dependent on
-Kind. The predicates elegant, expensive, and Italian can be made polymorphic.
-Rewrite the abstract syntax in Figure 27 in accordance with
-these ideas.
+and food items. To avoid duplicated code for these items, the best way to go is by making the categories of Item and Quality dependent on Kind.  
+The predicates elegant, expensive, and Italian can be made polymorphic.  
+Rewrite the abstract syntax in Figure 27 in accordance with these ideas.
 
+# Exercise 6-6.
+Write an abstract and concrete syntax with the concepts
+of this section, and experiment with it in GF.  
 
-# Exercise 6-6. Write an abstract and concrete syntax with the concepts
-of this section, and experiment with it in GF.
-Exercise 6-7.* Dene the notions of \even" and \odd" by using proof
-objects. Hint. You need one function for proving that 0 is even, and
-two other functions for propagating the properties from each number
-to its successor.
-
+# Exercise 6-7.  
+Define the notions of "even" and "odd" by using proof
+objects.
+**Hint**. You need one function for proving that 0 is even, and two other functions for propagating the properties from each number to its successor.
 
 # Exercise 6-8.* Write a new version of the Smart grammar with classes,
 and test it in GF.
