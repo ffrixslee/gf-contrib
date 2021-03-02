@@ -26,6 +26,8 @@ Chapter 6:
 - Learned that you can use wildcard('_') or omit arguments for non-dependent types
 - Dependent type is a type that takes arguments from other types
 - Still don't understand how chapter 6 works eg, how to write dependent types
+- Need to clarify about aggregation in gf:
+> there is fun and def in abstract syntax, how should the concrete syntax look like ?
 
 Chapter 7: 
 - [x] Learn how to convert other grammars to .pgf (Tutorial 7 and Chapter 7 is a bit different from blog)

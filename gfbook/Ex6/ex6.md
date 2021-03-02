@@ -186,11 +186,80 @@ As concrete syntax, use the notation of your favourite functional programming
 language.
 
 
-# Exercise 6-15.* Write a concrete syntax of Aggregation and test the
-grammar in the GF shell. Notice that we have used or as the only
-conjunction to simplify number agreement for noun phrases; however,
-there is no extra problem to use and if linearization is dened by using
-the resource grammar.
+# Exercise 6-15.* 
+Write a concrete syntax of Aggregation and test the grammar in the GF shell.  
+Notice that we have used `or` as the only conjunction to simplify number agreement for noun phrases; however, there is no extra problem to use `and` if linearization is defined by using the resource grammar.
+
+> Output (need to fix the code):  
+Aggregation> gr -number=5 | l  
+Mary or Mary walk  
+Mary run or John walk or Mary run  
+John walk or John walk or John run or Mary walk or John walk or Mary run  
+John walk walk walk walk or John walk  
+Mary run  
+
+```hs
+Abstract syntax:
+abstract Aggregation = {
+    cat S ; NP ; VP ;
+    data
+      PredVP : NP -> VP -> S ;
+      ConjS  : S -> S -> S ;
+      ConjVP : VP -> VP -> VP ;
+      ConjNP : NP -> NP -> NP ;
+      Run, Walk : VP ;
+      John, Mary : NP ;
+    
+    fun aggr : S -> S ; -- main aggregation function
+    def aggr (ConjS (PredVP x X) (PredVP y Y)) = 
+      ifS (eqNP x y)
+        (PredVP x (ConjVP X Y))
+        (ifS (eqVP X Y)
+          (PredVP (ConjNP x y) X)
+          (ConjS (PredVP x X) (PredVP y Y))) ;
+    fun ifS : Bool -> S -> S -> S ; -- if then else
+    def
+      ifS True x _ = x ;
+      ifS False _ y = y ;
+    fun eqNP : NP -> NP -> Bool ; -- x == y
+    def
+      eqNP John John = True ;
+      eqNP Mary Mary = True ;
+      eqNP _ _ = False ;
+    fun eqVP : VP -> VP -> Bool ; -- X == Y
+    def
+      eqVP Run Run = True ;
+      eqVP Walk Walk = True ;
+      eqVP _ _ = False ;
+    cat  Bool ;
+    data True, False : Bool ;
+}
+
+Concrete syntax: 
+concrete AggregationEng of Aggregation = {
+    lincat
+      S, NP, VP = Str ;
+    lin
+      PredVP x y = x ++ y ;
+      ConjS x y = x ++ "or" ++ y ;
+      ConjVP x y = x  ++ y ;
+      ConjNP x y = x ++ "or" ++ y ;
+
+      aggr x = x ;
+      -- ifS
+      -- eqNP x y = x == y ;
+      -- eqVP 
+
+
+      John = "John" ;
+      Mary = "Mary" ;
+      Run = "run" ;
+      Walk = "walk" ;
+      True = {s = "true"} ;
+      False = {s = "false"} ;
+}
+```
+
 # Exercise 6-16.* English phrases of the form A and B or C are ambiguous.
 Generalize the Aggregation grammar by using the conjunction
 word, either and and or, as an extra argument of conjunctions, and
@@ -222,9 +291,10 @@ this in GF, by means of two separate categories Nat and Bin, and
 the transfer functions bin2nat and nat2bin. Test your conversions by
 random-generating numbers and converting them back and forth.
 
-# Exercise 6-20. Generate 100 random trees in the Food grammar and
-count the frequencies of This and That, to verify that the generator
-obeys the probabilities.
+# Exercise 6-20
+Generate 100 random trees in the Food grammar and count the frequencies of This and That, to verify that the generator obeys the probabilities.  
+
+> Yes, the generator obeys the probabilities.
 
 ```hs
 excuse me , is this expensive cheese with cheese with chocolate French ?
