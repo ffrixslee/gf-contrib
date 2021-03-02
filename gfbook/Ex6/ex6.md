@@ -225,3 +225,106 @@ random-generating numbers and converting them back and forth.
 # Exercise 6-20. Generate 100 random trees in the Food grammar and
 count the frequencies of This and That, to verify that the generator
 obeys the probabilities.
+
+```hs
+excuse me , is this expensive cheese with cheese with chocolate French ?
+this fish with cheese with chocolate is fresh
+excuse me , is that chocolate fresh ?
+this cheese with fish with chocolate isn't delicious
+this chocolate is Italian
+this chocolate is fresh
+this cheese with fish with chocolate isn't Italian
+that water isn't Italian
+that clean fish with fish with chocolate isn't clean
+excuse me , is this water expensive ?
+this chocolate isn't expensive
+excuse me , is that chocolate French ?
+that fresh cheese with water is fresh
+this fish with chocolate isn't fresh
+this cheese with fish with water isn't fresh
+excuse me , is this cheese with cheese with chocolate expensive ?
+this water is fresh
+this chocolate is fresh
+this chocolate isn't fresh
+excuse me , is this chocolate fresh ?
+excuse me , is this cheese with chocolate Italian ?
+that chocolate is fresh
+this cheese with cheese with water isn't weird
+this fresh fish with water is fresh
+that cheese with chocolate is fresh
+that water isn't very fresh
+this chocolate isn't fresh
+this water isn't boring
+excuse me , is that chocolate Italian ?
+this water is weird
+this water is expensive
+this cheese with chocolate isn't fresh
+excuse me , is this fish with water fresh ?
+excuse me , is this water fresh ?
+this fresh cheese with chocolate is French
+this chocolate is fresh
+excuse me , is this fish with chocolate French ?
+excuse me , is this water boring ?
+excuse me , is this fresh cheese with water expensive ?
+this chocolate is very fresh
+excuse me , is this weird cheese with chocolate fresh ?
+excuse me , is this chocolate French ?
+this chocolate isn't fresh
+excuse me , is this chocolate fresh ?
+this fish with cheese with water isn't fresh
+this water isn't French
+excuse me , is this chocolate warm ?
+this water isn't warm
+this water isn't very boring
+excuse me , is this fish with water delicious ?
+that French cheese with water is fresh
+this water isn't fresh
+excuse me , is that chocolate boring ?
+excuse me , is this water warm ?
+excuse me , is this warm fish with water weird ?
+excuse me , is this French fish with water boring ?
+excuse me , is that chocolate expensive ?
+this chocolate is very very fresh
+this chocolate isn't warm
+that fish with water isn't fresh
+this fish with cheese with chocolate is French
+this French fish with chocolate is fresh
+this water is fresh
+this water is very clean
+this cheese with chocolate isn't very delicious
+excuse me , is this chocolate French ?
+excuse me , is this water fresh ?
+excuse me , is this cheese with water fresh ?
+this water isn't fresh
+excuse me , is that fish with cheese with water delicious ?
+this warm fish with chocolate is French
+this water is fresh
+excuse me , is this fish with chocolate fresh ?
+excuse me , is this chocolate weird ?
+this chocolate is fresh
+excuse me , is this fish with chocolate fresh ?
+this chocolate is Italian
+this chocolate isn't fresh
+this water is fresh
+excuse me , is that water warm ?
+excuse me , is this chocolate boring ?
+this chocolate isn't fresh
+this water isn't very fresh
+this chocolate is Italian
+that water is French
+this water is delicious
+this chocolate isn't fresh
+excuse me , is this chocolate delicious ?
+this fish with cheese with chocolate isn't fresh
+that water is very fresh
+excuse me , is this cheese with water very clean ?
+this fish with water is clean
+this warm cheese with water is expensive
+this chocolate isn't fresh
+excuse me , is this chocolate French ?
+this cheese with cheese with chocolate isn't weird
+this chocolate is fresh
+this water is delicious
+this clean fish with fish with chocolate is very clean
+this fresh cheese with chocolate is fresh
+```
